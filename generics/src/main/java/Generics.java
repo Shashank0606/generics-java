@@ -1,19 +1,47 @@
-public class Generics {
 
-	public static <T extends Comparable<T>> T maximum(T x, T y, T z) {
-		T max = x;
+import java.util.Arrays;
 
-		if (y.compareTo(max) > 0)
-			max = y;
+public class Generics<T extends Comparable<T>> { // sorting using comparable interface in collection generic class
+	private T[] inputArray;
 
-		if (z.compareTo(max) > 0)
-			max = z;
-
-		return max;
+	Generics(T[] inputArray) { // generics method to accept Type from generics class array
+		this.inputArray = inputArray; // converting into this method object
 	}
 
-	public static void main(String args[]) {
-		System.out.printf("Maximum of %s, %s and %s is %s\n", "Peach", "Apple", "Banana", maximum(
-				"Peach", "Apple", "Banana"));
+	public void maxElement() { // accept more than 3 no using array
+		for (int i = 0; i < inputArray.length - 1; i++) { // index value of array
+			if (inputArray[i].compareTo(inputArray[i + 1]) > 0) {
+				inputArray[i + 1] = inputArray[i];
+			}
+		}
+		System.out.println(inputArray[inputArray.length - 1]);
 	}
+
+	public void display() {
+		for (int i = 0; i < inputArray.length; i++) {
+			System.out.println(inputArray[i]);
+		}
+		Arrays.sort(inputArray);
+		System.out.println("After Sorting");
+		for (int i = 0; i < inputArray.length; i++) {
+			System.out.println(inputArray[i]);
+		}
+	}
+
+	public static void main(String[] args) {
+		Integer[] integer = { 56, 30, 70, 123, 43, 56 };
+		String[] string = { "Peach", "Banana", "Apple", "Orange" };
+		Float[] floats = { 0.56f, 000000.30f, 7.340f, 0000.01f };
+		System.out.println("Integers:-");
+		new Generics(integer).display();
+		System.out.println("String:-");
+		new Generics(string).display();
+		System.out.println("Float:-");
+		new Generics(floats).display();
+		System.out.println("Maximum From Three Value");
+		new Generics(integer).maxElement();
+		new Generics(string).maxElement();
+		new Generics(floats).maxElement();
+	}
+
 }
