@@ -1,23 +1,32 @@
 package com.bridgelabz.generics;
 
-public class Generics {
-	public static <T extends Comparable<T>> T maximum(T x, T y, T z) {
-		T max = x; // assume x initially largest
-		if (y.compareTo(max) > 0) {
-			max = y; // y is the largest
+public class Generics <Textends Comparable<T>>{ / /gen eric class 
+	T x;
+	T y;
+	T z;
+
+	Generics(T x, T y, T z) {//par ameterized constructor
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	}
+
+	public T testMaximum() {// testMaximum method 3 parameter calling internally
+
+		if (x.compareTo(y) > 0) {
+			return x;
+		} else if (y.compareTo(z) > 0) {
+			return y;
 		}
-		if (z.compareTo(max) > 0) {
-			max = z; // z is the largest
-		} else {
-			max = x;
-		}
-		return max;
 	}
 
 	public static void main(String[] args) {
-		System.out.println("Maximum number out of three integers is: " + maximum(15, 32, 45));
-		System.out.println("Maximum number out of three float is: " + maximum(5.1F, 32.2F, 45.3F));
-		System.out.println("Maximum among three string is: " + maximum("Apple", "Banana", "Peach"));
+		Generics<Integer> compareInteger = new Generics<Integer>(15, 32, 45);
+		System.out.println("Maximum number out of three integers is: " + compareInteger.testMaximum());
+		Generics<Float> comapareFloat = new Generics<Float>(15.1F, 32.2F, 45.3F);
+		System.out.println("Maximum number out of three float is: " + comapareFloat.testMaximum());
+		Generics<String> compareString = new Generics<String>("Apple", "Banana", "Peach");
+		System.out.println("Maximum among three string is: " + compareString.testMaximum());
 	}
 
 }
